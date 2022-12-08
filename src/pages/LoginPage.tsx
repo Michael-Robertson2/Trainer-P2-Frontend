@@ -1,5 +1,8 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
+import { Link, useNavigate } from 'react-router-dom';
 import YOLP_API from "../ApiConfig";
+import { SetAuthContext } from "../context/AuthProvider";
+import Auth from "../models/Auth";
 
 /* 
     State is a built-in React object that is used to contain data or information about the component. 
@@ -13,6 +16,8 @@ export default function LoginPage() {
     const [username, setUsername] = useState<string>(""); // useState is a hook
     const [pwd, setPwd] = useState<string>("");
     const [error, setError] = useState<string>("");
+    const setAuth = useContext(SetAuthContext);
+    const navigate = useNavigate();
 
     async function submit(e: FormEvent) {
         e.preventDefault();
@@ -21,8 +26,11 @@ export default function LoginPage() {
             username: username,
             password: pwd,
         }).then((resp) => {
-            setError("");
-            console.log(resp);
+            let auth = new Auth(resp.data.id, resp.data.username, resp.data.role, resp.data.token);
+            // save auth user into session storage
+            // window.sessionStorage.setItem("auth", JSON.stringify(auth));
+            setAuth!(auth);
+            navigate("/");
         })
             .catch((e) => setError(e.response.data.message));
 
@@ -37,7 +45,8 @@ export default function LoginPage() {
                 <input className="bg-blue-100 shadow-xl rounded-md px-5 py-2" type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                 <input className="bg-blue-100 shadow-xl rounded-md px-5 py-2" type="password" placeholder="Password" value={pwd} onChange={(e) => setPwd(e.target.value)} />
                 {error ? <p className="text-red-500">{error}</p> : null}
-                <button className="bg-slate-700 rounded-md text-white mt-2 px-5 py-2 ease-out duration-300 hover:scale-125">LOGIN</button>
+                <button className="bg-slate-800 rounded-md text-white mt-2 px-5 py-2 ease-out duration-300 hover:scale-125">LOGIN</button>
+                <Link to={"/signup"} className="text-blue-700 underline">Create new account</Link>
             </div>
         </form>
     );

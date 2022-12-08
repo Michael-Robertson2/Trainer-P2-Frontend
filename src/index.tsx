@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import AuthProvider from './context/AuthProvider';
 
 /* Create a React root for the supplied container and return the root. The root can be used to render a React element into the DOM */
 /* DOM (Document Object Model) */
@@ -13,9 +14,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path='/*' element={<App />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path='/*' element={<App />} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
