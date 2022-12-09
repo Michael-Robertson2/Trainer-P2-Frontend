@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.restolist-img {
+    width: 100%;
+    object-fit: cover;
+    height: 500px;
+}
