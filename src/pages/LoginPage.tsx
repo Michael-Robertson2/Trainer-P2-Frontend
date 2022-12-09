@@ -28,7 +28,7 @@ export default function LoginPage() {
         }).then((resp) => {
             let auth = new Auth(resp.data.id, resp.data.username, resp.data.role, resp.data.token);
             // save auth user into session storage
-            // window.sessionStorage.setItem("auth", JSON.stringify(auth));
+            window.sessionStorage.setItem("auth", JSON.stringify(auth));
             setAuth!(auth);
             navigate("/");
         })
