@@ -1,13 +1,13 @@
 
 export default class Review {
     id: string;
-    rating: string;
+    rating: number;
     msg: string;
     username: string;
     user_id: string;
     restaurant_id: string;
 
-    constructor(id: string, rating: string, msg: string, username: string, user_id:string, restaurant_id: string) {
+    constructor(id: string, rating: number, msg: string, username: string, user_id:string, restaurant_id: string) {
         this.id = id;
         this.rating = rating;
         this.msg = msg;

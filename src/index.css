@@ -2,8 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+.home-background {
+    width: 100%;
+    object-fit: cover;
+}
+
+.welcome-to-yolp {
+
+}
+
 .restolist-img {
     width: 100%;
     object-fit: cover;
     height: 500px;
+}
+
+.star-radio {
+    display: none;
+}
+
+.star {
+    cursor: pointer;
+    transition: color 200ms;
 }

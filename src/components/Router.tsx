@@ -1,6 +1,8 @@
+import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import ErrorPage from '../pages/ErrorPage';
 import HomePage from '../pages/HomePage';
+import LoadinPage from '../pages/LoadingPage';
 import LoginPage from '../pages/LoginPage';
 import RestaurantPage from '../pages/RestaurantPage';
 import RestaurantsPage from '../pages/RestaurantsPage';
