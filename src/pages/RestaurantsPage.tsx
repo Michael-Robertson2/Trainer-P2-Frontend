@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { StarIcon } from '@heroicons/react/24/solid';
-import YOLP_API from "../ApiConfig";
+import YOLP_API from "../utils/ApiConfig";
 import Restaurant from "../models/Restaurant";
 import LoadinPage from "./LoadingPage";
 import '../index.css';
@@ -34,13 +34,13 @@ export default function RestaurantsPage() {
     return (
         restoList
             ? <div>
-                <h1 className="mt-40 font-bold text-7xl text-center">Restaurants</h1>
-                <div className="grid grid-cols-3 place-items-center | mt-20">
+                <h1 className="font-serif italic font-bold text-7xl text-center | mt-40">RESTAURANTS</h1>
+                <div className="grid grid-cols-3 place-items-center | mt-32">
                     {restoList.map((r) => (
-                        <ul className="flex flex-col items-center py-5 mb-40 w-2/3 rounded-2xl shadow-xl cursor-pointer ease-out hover:scale-125 duration-300" onClick={() => navigate(`/restaurant/${r.id}`)}>
-                            <li><img className="p-10 restolist-img" src={r.img} alt="" /></li>
+                        <ul className="flex flex-col items-center | py-5 mb-40 w-2/3 | rounded-2xl shadow-xl cursor-pointer | ease-out duration-300 hover:scale-125" onClick={() => navigate(`/restaurant/${r.id}`)}>
+                            <li><img className="restolist-img | p-10" src={r.img} alt="" /></li>
                             <li className="font-bold text-2xl">{r.name}</li>
-                            <li className="flex items-center gap-2 justify-center font-bold text-xl">
+                            <li className="flex items-center justify-center | gap-2 | font-bold text-xl">
                                 <StarIcon color="#FDD017" className="w-6" />
                                 <p>{getAvgRating(r.reviews)}</p>
                             </li>

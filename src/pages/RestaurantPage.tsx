@@ -2,7 +2,7 @@ import { FormEvent, useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
 import { StarIcon } from "@heroicons/react/24/solid";
-import YOLP_API from "../ApiConfig";
+import YOLP_API from "../utils/ApiConfig";
 import Rating from "../components/Rating";
 import Restaurant from "../models/Restaurant";
 import Review from "../models/Review";
@@ -12,10 +12,11 @@ export default function RestaurantPage() {
     const { id } = useParams();
     const navigate = useNavigate();
     const auth = useContext(AuthContext);
+    const [msg, setMsg] = useState<string>("");
+    const [rating, setRating] = useState<number>(0);
     const [resto, setResto] = useState<Restaurant | null>(null);
     const [reviews, setReviews] = useState<Review[] | null>(null);
-    const [rating, setRating] = useState<number>(0);
-    const [msg, setMsg] = useState<string>("");
+    
 
     useEffect(() => {
         getReviewsByRestoId()
@@ -43,6 +44,17 @@ export default function RestaurantPage() {
         });
     }
 
+    async function deleteReview() {
+        await YOLP_API.delete("/reviews", {
+            data: {
+                restaurant_id: resto?.id,
+                user_id: auth?.id
+            }
+        }).then(() => {
+            window.location.reload();
+        }).catch((e) => console.log(e));
+    }
+
     async function submit(e: FormEvent) {
         e.preventDefault();
         await YOLP_API.post("/reviews", {
@@ -53,7 +65,10 @@ export default function RestaurantPage() {
             "user_id": auth?.id
         }).then((resp) => {
             window.location.reload();
-        }).catch((e) => console.log(e));
+        }).catch((e: any) => {
+            alert(e.response?.data?.message);
+            window.location.reload();
+        });
     }
 
     return (
@@ -71,14 +86,17 @@ export default function RestaurantPage() {
                                     <p>{r.rating}</p>
                                 </li>
                                 <li><strong>Review: </strong>{r.msg}</li>
+                                {r.username == auth?.username
+                                    ? <button className="text-left text-red-500 underline" onClick={() => deleteReview()}>Delete review</button>
+                                    : null}
                             </ul>
                         ))}
                     </div>
                     : <h1 className="font-bold font-serif text-5xl">No Reviews Yet...</h1> }
                 <form onSubmit={(e) => submit(e)} className="flex flex-col items-center gap-10">
-                    <h2 className="font-bold font-serif text-3xl">Leave a review</h2>
+                    <h2 className="font-bold font-serif text-3xl italic">Leave a review</h2>
                     <Rating updateRating={setRating} />
-                    <textarea className="bg-slate-100 p-5 rounded-md" placeholder="Enter a review" cols={55} rows={5} value={msg} onChange={(e) => setMsg(e.target.value)} ></textarea>
+                    <textarea className="bg-slate-100 p-5 rounded-md" placeholder="Enter a review" cols={55} rows={5} value={msg} onChange={(e) => setMsg(e.target.value)} required></textarea>
                     <button className="bg-slate-700 px-10 py-4 mb-40 text-white rounded-md ease-out hover:scale-125 duration-300">Submit</button>
                 </form>
             </div>

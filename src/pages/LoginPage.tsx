@@ -1,8 +1,9 @@
 import { FormEvent, useContext, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import YOLP_API from "../ApiConfig";
+import YOLP_API from "../utils/ApiConfig";
 import { SetAuthContext } from "../context/AuthProvider";
 import Auth from "../models/Auth";
+import "../index.css";
 
 /* 
     State is a built-in React object that is used to contain data or information about the component. 
@@ -39,15 +40,19 @@ export default function LoginPage() {
     }
 
     return (
-        <form className="flex justify-center items-center" onSubmit={(e) => submit(e)}>
-            <div className="flex flex-col items-center gap-7 shadow-xl rounded-xl mt-40 px-10 py-16">
-                <h1 className="font-serif font-bold text-5xl">LOGIN</h1>
-                <input className="bg-blue-100 shadow-xl rounded-md px-5 py-2" type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-                <input className="bg-blue-100 shadow-xl rounded-md px-5 py-2" type="password" placeholder="Password" value={pwd} onChange={(e) => setPwd(e.target.value)} />
-                {error ? <p className="text-red-500">{error}</p> : null}
-                <button className="bg-slate-800 rounded-md text-white mt-2 px-5 py-2 ease-out duration-300 hover:scale-125">LOGIN</button>
-                <Link to={"/signup"} className="text-blue-700 underline">Create new account</Link>
-            </div>
-        </form>
+        <div className="flex justify-center">
+            <img className="login-img | m-5 p-5 | border-8 border-slate-100 | shadow-2xl rounded-lg" src="https://static.vecteezy.com/system/resources/previews/006/554/439/original/marble-with-golden-texture-background-illustration-free-vector.jpg" alt="" />
+            
+            <form className="absolute backdrop-blur-xl rounded-m top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center" onSubmit={(e) => submit(e)}>
+                <div className="flex flex-col items-center gap-7 shadow-xl rounded-xl px-10 py-16">
+                    <h1 className="font-serif font-bold text-black text-5xl">LOGIN</h1>
+                    <input className="shadow-xl rounded-md px-5 py-2 mt-10 focus:scale-110 duration-300 ease-out" type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                    <input className="shadow-xl rounded-md px-5 py-2 focus:scale-110 duration-300 ease-out" type="password" placeholder="Password" value={pwd} onChange={(e) => setPwd(e.target.value)} />
+                    {error ? <p className="text-red-500">{error}</p> : null}
+                    <button className="bg-slate-300 rounded-md text-black font-bold mt-2 px-5 py-2 ease-out duration-300 hover:scale-125 shadow-xl">LOGIN</button>
+                    <Link to={"/signup"} className="text-blue-700 font-bold underline">Create new account</Link>
+                </div>
+            </form>
+        </div>
     );
 }

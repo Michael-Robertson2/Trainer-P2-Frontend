@@ -6,6 +6,7 @@ import LoadinPage from '../pages/LoadingPage';
 import LoginPage from '../pages/LoginPage';
 import RestaurantPage from '../pages/RestaurantPage';
 import RestaurantsPage from '../pages/RestaurantsPage';
+import SignupPage from '../pages/SignupPage';
 
 export default function Router() {
     return (
@@ -13,6 +14,7 @@ export default function Router() {
             {/* public routes */}
             <Route path='/' element={<HomePage />} />
             <Route path='/login' element={<LoginPage />} />
+            <Route path='/signup' element={<SignupPage />} />
             <Route path='/restaurants' element={<RestaurantsPage />} />
             <Route path='/restaurant/:id' element={<RestaurantPage />} />
 

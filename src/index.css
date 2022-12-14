@@ -2,21 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+/* home page*/
 .home-background {
     width: 100%;
     object-fit: cover;
 }
 
-.welcome-to-yolp {
-
+/* login page */
+.login-img {
+    width: 70%;
+    object-fit: cover; 
+    height: 1000px;  
+    
 }
 
+/* signup page */
+.singup-img {
+    width: 70%;
+    object-fit: cover; 
+    height: 1000px;  
+}
+
+/* restaurants page */
 .restolist-img {
     width: 100%;
     object-fit: cover;
     height: 500px;
 }
 
+/* rating component */
 .star-radio {
     display: none;
 }

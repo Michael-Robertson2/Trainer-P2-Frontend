@@ -31,7 +31,7 @@ export default function Navbar() {
     }, []);
 
     return (
-        <nav className="flex justify-between items-center text-xl shadow-xl px-20 py-5">
+        <nav className="flex justify-between items-center | text-xl shadow-xl | px-20 py-5">
             <ul className="flex items-center gap-5">
                 <li className="font-bold font-serif text-2xl"><Link to={"/"}>YOLP</Link></li>
                 <li className=""><Link to={"/restaurants"}>Restaurants</Link></li>
@@ -43,7 +43,7 @@ export default function Navbar() {
                             <UserIcon className="w-7" />{auth.username}
                             {dropdown && <button className="absolute translate-y-16 translate-x-10 bg-red-700 rounded-xl text-white px-5 py-2" onClick={() => logout()}>Log out</button>}
                         </div>
-                        : <li className="bg-green-600 text-white rounded-xl px-5 py-2"><Link to={"/login"}>Login</Link></li>
+                        : <button onClick={() => navigate("/login")}>Login</button>
                 }
             </ul>
         </nav>
