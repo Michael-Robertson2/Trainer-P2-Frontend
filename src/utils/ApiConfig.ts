@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const YOLP_API = axios.create({
-    baseURL: "http://localhost:8080/yolp",
+    baseURL: "http://yolp-env.eba-trqyyiqz.us-east-1.elasticbeanstalk.com/yolp",
     headers: {
         "Content-Type": "application/json"
     }
